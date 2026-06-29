@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="IMAGES/ChatGPT Image Jun 29, 2026, 05_01_39 AM.png">
+<title>Admin Panel</title>
+<link rel="icon" href="images/thalassery_logo.png">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100">
+
+<div class="max-w-7xl mx-auto p-6">
+
+    <!-- Header -->
+
+    <div class="bg-teal-700 text-white rounded-2xl p-6 shadow">
+
+        <div class="flex justify-between items-center">
+
+            <div>
+
+                <h1 class="text-3xl font-bold">
+                     Admin Panel
+                </h1>
+
+                <p>Thalassery Hotel POS</p>
+
+            </div>
+
+            <button
+                onclick="logout()"
+                class="bg-white text-teal-700 px-5 py-2 rounded-xl font-bold">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Dashboard -->
+
+    <div class="grid lg:grid-cols-3 gap-6 mt-6">
+
+        <!-- LEFT -->
+
+        <div class="lg:col-span-2">
+
+            <div class="bg-white rounded-2xl shadow p-6">
+
+                <h2 class="text-xl font-bold mb-5">
+
+                    🍽 Menu Management
+
+                </h2>
+
+                <div id="menuList"></div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div>
+
+            <!-- Add Item -->
+
+            <div class="bg-white rounded-2xl shadow p-6 mb-6">
+
+                <h2 class="font-bold text-lg mb-4">
+
+                    ➕ Add Item
+
+                </h2>
+
+                <input
+                    id="itemName"
+                    class="border rounded-lg w-full p-3 mb-3"
+                    placeholder="Item Name">
+
+                <input
+                    id="itemPrice"
+                    type="number"
+                    class="border rounded-lg w-full p-3 mb-3"
+                    placeholder="Price">
+
+                <select
+                    id="itemCategory"
+                    class="border rounded-lg w-full p-3 mb-3">
+
+                </select>
+
+                <input
+                    id="itemEmoji"
+                    class="border rounded-lg w-full p-3 mb-3"
+                    placeholder="Emoji (☕ 🍛 🥤)">
+
+                <button
+                    onclick="addItem()"
+                    class="w-full bg-green-600 text-white rounded-lg py-3">
+
+                    Add Item
+
+                </button>
+
+            </div>
+
+            <!-- Hotel Settings -->
+
+            <div class="bg-white rounded-2xl shadow p-6 mt-6">
+
+    <h2 class="text-xl font-bold mb-5">
+        ⚙️ Hotel Settings
+    </h2>
+
+    <div class="space-y-4">
+
+        <div>
+            <label class="block mb-2 font-semibold">
+                🏨 Hotel Name
+            </label>
+
+            <input
+                id="hotelName"
+                type="text"
+                class="w-full border rounded-lg p-3"
+                placeholder="Hotel Name">
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold">
+                📞 Phone Number
+            </label>
+
+            <input
+                id="hotelPhone"
+                type="text"
+                class="w-full border rounded-lg p-3"
+                placeholder="Phone Number">
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold">
+                📍 Address
+            </label>
+
+            <textarea
+                id="hotelAddress"
+                rows="3"
+                class="w-full border rounded-lg p-3"
+                placeholder="Hotel Address"></textarea>
+        </div>
+
+        <hr class="my-5">
+
+        <h3 class="text-lg font-bold">
+            🔐 Admin Login
+        </h3>
+
+        <div>
+            <label class="block mb-2 font-semibold">
+                Username
+            </label>
+
+            <input
+                id="adminUser"
+                type="text"
+                class="w-full border rounded-lg p-3">
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold">
+                Current Password
+            </label>
+
+            <input
+                id="currentPassword"
+                type="password"
+                class="w-full border rounded-lg p-3">
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold">
+                New Password
+            </label>
+
+            <input
+                id="newPassword"
+                type="password"
+                class="w-full border rounded-lg p-3">
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold">
+                Confirm Password
+            </label>
+
+            <input
+                id="confirmPassword"
+                type="password"
+                class="w-full border rounded-lg p-3">
+        </div>
+
+        <button
+            onclick="saveSettings()"
+            class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold">
+
+            💾 Save Settings
+
+        </button>
+
+    </div>
+
+</div>
+        </div>
+
+    </div>
+
+</div>
+<!-- Edit Item Modal -->
+<div id="editModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md">
+
+        <h2 class="text-3xl font-bold mb-5">
+             Edit Menu Item
+        </h2>
+
+        <input
+            id="editName"
+            class="w-full border rounded-lg p-3 mb-3"
+            placeholder="Item Name">
+
+        <input
+            id="editPrice"
+            type="number"
+            class="w-full border rounded-lg p-3 mb-3"
+            placeholder="Price">
+
+        <select
+            id="editCategory"
+            class="w-full border rounded-lg p-3 mb-3">
+        </select>
+
+        <input
+            id="editEmoji"
+            class="w-full border rounded-lg p-3 mb-5"
+            placeholder="Emoji">
+
+        <div class="flex gap-3">
+
+            <button
+                onclick="updateItem()"
+                class="flex-1 bg-green-600 text-white py-3 rounded-lg">
+
+                💾 Save
+
+            </button>
+
+            <button
+                onclick="closeModal()"
+                class="flex-1 bg-gray-500 text-white py-3 rounded-lg">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

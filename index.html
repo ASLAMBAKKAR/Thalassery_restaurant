@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Thalassery Hotel</title>
+
+<link rel="icon" href="images/thalassery_logo.png">
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+    background:#f3f4f6;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.card{
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+}
+
+::-webkit-scrollbar{
+    height:6px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#14b8a6;
+    border-radius:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="max-w-7xl mx-auto p-3 md:p-6">
+
+<!-- ================= HEADER ================= -->
+
+<div class="bg-teal-700 rounded-3xl shadow-x1 text-white p-5 md:p-8">
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+<div class="flex items-center gap-4">
+
+<img
+src="IMAGES/thalassery_logo.png"
+class="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-amber-500 shadow-lg"
+>
+
+<div>
+
+<h1
+id="hotelTitle"
+class="text-2xl md:text-4xl font-bold tracking-wide">
+THALASSERY HOTEL
+</h1>
+
+<p
+id="todayDate"
+class="text-teal-100 mt-1">
+</p>
+
+</div>
+
+</div>
+
+<button
+id="adminBtn"
+onclick="openLogin()"
+class="w-full md:w-auto bg-white text-teal-700 px-6 py-3 rounded-xl font-bold shadow hover:bg-gray-100 transition">
+
+🔐 Admin Login
+
+</button>
+
+</div>
+
+</div>
+
+ <!-- DASHBOARD  -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+
+<!-- Total Sales -->
+
+<div class="card bg-white rounded-2xl shadow-lg p-5">
+
+<p class="text-gray-500 text-sm">
+
+Today's Sales
+
+</p>
+
+<h2
+id="totalSales"
+class="text-3xl font-bold text-green-700 mt-2">
+
+₹0
+
+</h2>
+
+</div>
+
+<!-- Items Sold -->
+
+<div class="card bg-white rounded-2xl shadow-lg p-5">
+
+<p class="text-gray-500 text-sm">
+
+Items Sold
+
+</p>
+
+<h2
+id="totalItems"
+class="text-3xl font-bold text-blue-700 mt-2">
+
+0
+
+</h2>
+
+</div>
+
+<!-- Cash -->
+
+<div class="card bg-white rounded-2xl shadow-lg p-5">
+
+<label class="font-semibold text-gray-700">
+
+💵 Cash Collection
+
+</label>
+
+<input
+id="cash"
+type="number"
+placeholder="Enter Cash Amount"
+class="w-full border mt-3 rounded-xl p-3 text-lg focus:ring-2 focus:ring-green-500 outline-none">
+
+</div>
+
+<!-- UPI -->
+
+<div class="card bg-white rounded-2xl shadow-lg p-5">
+
+<label class="font-semibold text-gray-700">
+
+📱 UPI Collection
+
+</label>
+
+<input
+id="upi"
+type="number"
+placeholder="Enter UPI Amount"
+class="w-full border mt-3 rounded-xl p-3 text-lg focus:ring-2 focus:ring-blue-500 outline-none">
+
+</div>
+
+</div>
+
+<!-- ================= PAYMENT SUMMARY ================= -->
+
+<div class="bg-white rounded-2xl shadow-lg mt-6 p-5">
+
+<div class="flex flex-col md:flex-row justify-between gap-4">
+
+<div>
+
+<p class="text-gray-500">
+
+Cash + UPI Total
+
+</p>
+
+<h2
+id="paymentTotal"
+class="text-3xl font-bold text-teal-700">
+
+₹0
+
+</h2>
+
+</div>
+
+<div>
+
+<p class="text-gray-500">
+
+Difference
+
+</p>
+
+<h2
+id="difference"
+class="text-3xl font-bold text-red-600">
+
+₹0
+
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= CATEGORIES ================= -->
+
+<div
+id="categories"
+class="flex gap-3 overflow-x-auto mt-6 pb-2">
+</div>
+
+<!-- ================= MENU ================= -->
+
+<div
+id="menuGrid"
+class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-6">
+
+</div>
+
+
+<!-- ================= ACTION BUTTONS ================= -->
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+
+<button
+onclick="saveDay()"
+class="bg-green-600 hover:bg-green-700 text-white font-bold rounded-2xl py-4 text-lg shadow-lg transition">
+
+💾 Save Day
+
+</button>
+
+<button
+onclick="shareReport()"
+class="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl py-4 text-lg shadow-lg transition">
+
+📤 Share Report
+
+</button>
+
+<button
+onclick="resetSales()"
+class="bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl py-4 text-lg shadow-lg transition">
+
+🔄 Reset Sales
+
+</button>
+
+</div>
+
+<!-- ================= ADMIN LOGIN MODAL ================= -->
+
+<div
+id="loginModal"
+class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-50">
+
+<div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+
+<div class="bg-teal-700 text-white text-center py-6">
+
+<div class="text-5xl">
+
+🔐
+
+</div>
+
+<h2 class="text-2xl font-bold mt-2">
+
+Admin Login
+
+</h2>
+
+<p class="text-teal-100">
+
+Thalassery Hotel POS
+
+</p>
+
+</div>
+
+<div class="p-6">
+
+<label class="font-semibold">
+
+Username
+
+</label>
+
+<input
+id="loginUsername"
+type="text"
+placeholder="Enter Username"
+class="w-full border rounded-xl p-3 mt-2 mb-5 focus:ring-2 focus:ring-teal-500 outline-none">
+
+<label class="font-semibold">
+
+Password
+
+</label>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Enter Password"
+class="w-full border rounded-xl p-3 mt-2 focus:ring-2 focus:ring-teal-500 outline-none">
+
+<p
+id="loginError"
+class="hidden text-red-600 mt-3">
+
+Invalid Username or Password
+
+</p>
+
+<div class="grid grid-cols-2 gap-4 mt-6">
+
+<button
+onclick="closeLogin()"
+class="bg-gray-300 rounded-xl py-3 font-bold hover:bg-gray-400">
+
+Cancel
+
+</button>
+
+<button
+onclick="loginAdmin()"
+class="bg-teal-600 hover:bg-teal-700 text-white rounded-xl py-3 font-bold">
+
+Login
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Floating Scroll to Top Button -->
+
+<button
+id="topBtn"
+onclick="window.scrollTo({top:0,behavior:'smooth'})"
+class="fixed bottom-5 right-5 bg-teal-600 hover:bg-teal-700 text-white w-14 h-14 rounded-full shadow-xl hidden">
+
+⬆
+
+</button>
+
+<script>
+
+const cashInput = document.getElementById("cash");
+const upiInput = document.getElementById("upi");
+
+function updatePaymentSummary(){
+
+const cash = Number(cashInput.value) || 0;
+const upi = Number(upiInput.value) || 0;
+
+const paymentTotal = cash + upi;
+
+document.getElementById("paymentTotal").innerText =
+"₹" + paymentTotal;
+
+const sales =
+Number(
+document.getElementById("totalSales")
+.innerText.replace(/[^\d]/g,"")
+) || 0;
+
+document.getElementById("difference").innerText =
+"₹" + (sales - paymentTotal);
+
+localStorage.setItem("cash",cash);
+localStorage.setItem("upi",upi);
+
+}
+
+cashInput.value = localStorage.getItem("cash") || "";
+upiInput.value = localStorage.getItem("upi") || "";
+
+cashInput.addEventListener("input",updatePaymentSummary);
+upiInput.addEventListener("input",updatePaymentSummary);
+
+updatePaymentSummary();
+
+window.addEventListener("scroll",()=>{
+
+document.getElementById("topBtn").style.display =
+window.scrollY>300 ? "block":"none";
+
+});
+
+</script>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
