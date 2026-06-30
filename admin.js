@@ -303,7 +303,7 @@ function loadSettings(){
         hotel.address;
 
     document.getElementById("adminUser").value =
-        localStorage.getItem("adminUser") || "admin";
+        localStorage.getItem("adminUser") || "salih";
 
 }
 
