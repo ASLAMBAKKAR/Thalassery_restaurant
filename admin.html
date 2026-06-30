@@ -13,13 +13,13 @@
 
 </head>
 
-<body class="bg-gray-100">
+<body class="min-h-screen bg-[radial-gradient(circle_at_top,#115e59_0%,#064e3b_35%,#022c22_70%,#01110d_100%)] bg-fixed">
 
 <div class="max-w-7xl mx-auto p-6">
 
     <!-- Header -->
 
-    <div class="bg-teal-700 text-white rounded-2xl p-6 shadow">
+    <div class="bg-white/10 backdrop-blur-2xl border border-white/20 text-white rounded-3xl p-6 shadow-2xl">
 
         <div class="flex justify-between items-center">
 
@@ -35,7 +35,7 @@
 
             <button
                 onclick="logout()"
-                class="bg-white text-teal-700 px-5 py-2 rounded-xl font-bold">
+                class="bg-gradient-to-r from-red-500 to-rose-600 hover:scale-105 transition text-white px-6 py-3 rounded-2xl shadow-xl font-bold">
 
                 Logout
 
@@ -53,7 +53,7 @@
 
         <div class="lg:col-span-2">
 
-            <div class="bg-white rounded-2xl shadow p-6">
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-6 text-white">
 
                 <h2 class="text-xl font-bold mb-5">
 
@@ -73,7 +73,7 @@
 
             <!-- Add Item -->
 
-            <div class="bg-white rounded-2xl shadow p-6 mb-6">
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-6 mb-6 text-white">
 
                 <h2 class="font-bold text-lg mb-4">
 
@@ -83,29 +83,84 @@
 
                 <input
                     id="itemName"
-                    class="border rounded-lg w-full p-3 mb-3"
+                    class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 mb-3 text-white"
                     placeholder="Item Name">
 
                 <input
                     id="itemPrice"
                     type="number"
-                    class="border rounded-lg w-full p-3 mb-3"
+                    class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 mb-3 text-white"
                     placeholder="Price">
 
-                <select
-                    id="itemCategory"
-                    class="border rounded-lg w-full p-3 mb-3">
+                <div class="relative w-full mb-3">
 
-                </select>
+    <!-- Selected -->
+   <div class="relative w-full mb-3 z-[999]">
+
+    <!-- Button -->
+    <button
+        id="categoryBtn"
+        type="button"
+        onclick="toggleCategoryDropdown()"
+        class="w-full h-14
+        flex items-center justify-between
+        px-5
+        rounded-2xl
+        bg-white/10
+        backdrop-blur-xl
+        border border-white/20
+        text-white
+        shadow-[0_8px_30px_rgba(0,0,0,.25)]
+        hover:bg-white/15
+        transition">
+
+        <span id="selectedCategory">
+            Select Category
+        </span>
+
+        <svg
+            id="categoryArrow"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            class="w-5 h-5 transition-transform duration-300">
+
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 9l6 6 6-6"/>
+
+        </svg>
+
+    </button>
+
+    <!-- Dropdown -->
+    <div
+        id="categoryDropdown"
+        class="hidden absolute left-0 top-full mt-2 w-full z-[9999]
+        rounded-2xl
+        border border-white/20
+        bg-[#24584f]/95
+        backdrop-blur-3xl
+        shadow-[0_20px_50px_rgba(0,0,0,.45)]
+        overflow-hidden">
+
+    </div>
+
+</div>
+<!-- Hidden input -->
+<input type="hidden" id="itemCategory">
 
                 <input
                     id="itemEmoji"
-                    class="border rounded-lg w-full p-3 mb-3"
+                    class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 mb-3 text-white"
                     placeholder="Emoji (☕ 🍛 🥤)">
 
                 <button
                     onclick="addItem()"
-                    class="w-full bg-green-600 text-white rounded-lg py-3">
+                    class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:scale-105 transition duration-300 text-white rounded-2xl py-3 shadow-xl">
 
                     Add Item
 
@@ -115,7 +170,7 @@
 
             <!-- Hotel Settings -->
 
-            <div class="bg-white rounded-2xl shadow p-6 mt-6">
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-6 mt-6 text-white">
 
     <h2 class="text-xl font-bold mb-5">
         ⚙️ Hotel Settings
@@ -131,7 +186,7 @@
             <input
                 id="hotelName"
                 type="text"
-                class="w-full border rounded-lg p-3"
+                class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none"
                 placeholder="Hotel Name">
         </div>
 
@@ -143,7 +198,7 @@
             <input
                 id="hotelPhone"
                 type="text"
-                class="w-full border rounded-lg p-3"
+                class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none"
                 placeholder="Phone Number">
         </div>
 
@@ -155,7 +210,7 @@
             <textarea
                 id="hotelAddress"
                 rows="3"
-                class="w-full border rounded-lg p-3"
+                class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none"
                 placeholder="Hotel Address"></textarea>
         </div>
 
@@ -173,7 +228,7 @@
             <input
                 id="adminUser"
                 type="text"
-                class="w-full border rounded-lg p-3">
+                class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none">
         </div>
 
         <div>
@@ -184,7 +239,7 @@
             <input
                 id="currentPassword"
                 type="password"
-                class="w-full border rounded-lg p-3">
+                class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none">
         </div>
 
         <div>
@@ -195,7 +250,7 @@
             <input
                 id="newPassword"
                 type="password"
-                class="w-full border rounded-lg p-3">
+                class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none">
         </div>
 
         <div>
@@ -206,12 +261,12 @@
             <input
                 id="confirmPassword"
                 type="password"
-                class="w-full border rounded-lg p-3">
+                class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none">
         </div>
 
         <button
             onclick="saveSettings()"
-            class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold">
+            class="w-full bg-gradient-to-r from-emerald-500 to-cyan-600 hover:scale-105 transition duration-300 text-white py-3 rounded-2xl shadow-xl font-bold">
 
             💾 Save Settings
 
@@ -226,9 +281,9 @@
 
 </div>
 <!-- Edit Item Modal -->
-<div id="editModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+<div id="editModal" class="fixed inset-0 bg-black/40 backdrop-blur-md hidden items-center justify-center z-50">
 
-    <div class="bg-white rounded-2xl p-6 w-full max-w-md">
+    <div class="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-6 w-full max-w-md text-white shadow-2xl">
 
         <h2 class="text-3xl font-bold mb-5">
              Edit Menu Item
@@ -236,30 +291,30 @@
 
         <input
             id="editName"
-            class="w-full border rounded-lg p-3 mb-3"
+            class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 mb-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none"
             placeholder="Item Name">
 
         <input
             id="editPrice"
             type="number"
-            class="w-full border rounded-lg p-3 mb-3"
+            class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 mb-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none"
             placeholder="Price">
 
         <select
             id="editCategory"
-            class="w-full border rounded-lg p-3 mb-3">
+            class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 mb-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none">
         </select>
 
         <input
             id="editEmoji"
-            class="w-full border rounded-lg p-3 mb-5"
+            class="class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none" mb-5"
             placeholder="Emoji">
 
         <div class="flex gap-3">
 
             <button
                 onclick="updateItem()"
-                class="flex-1 bg-green-600 text-white py-3 rounded-lg">
+                class="flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-2xl hover:scale-105 transition">
 
                 💾 Save
 
@@ -267,7 +322,7 @@
 
             <button
                 onclick="closeModal()"
-                class="flex-1 bg-gray-500 text-white py-3 rounded-lg">
+                class="flex-1 bg-white/20 backdrop-blur-lg border border-white/20 text-white py-3 rounded-2xl hover:bg-white/30 transition">
 
                 Cancel
 

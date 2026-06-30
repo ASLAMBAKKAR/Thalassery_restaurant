@@ -54,21 +54,25 @@ function renderCategories(){
 
         btn.innerText=cat;
 
-        btn.className=
-        "px-5 py-2 rounded-xl shadow";
+        btn.className =
+        "px-6 py-3 rounded-2xl backdrop-blur-lg border border-white/20 transition";
 
         if(cat===currentCategory){
 
-            btn.classList.add(
-                "bg-teal-700",
-                "text-white"
-            );
+           btn.classList.add(
+           "bg-gradient-to-r",
+           "from-emerald-500",
+           "to-teal-600",
+           "text-white",
+           "shadow-xl"
+        );
 
         }else{
 
             btn.classList.add(
-                "bg-white"
-            );
+            "bg-white/10",
+            "text-white"
+        );
 
         }
 
@@ -157,7 +161,6 @@ function shareReport() {
             report += `${item.emoji} ${item.name}\n`;
             report += `   Qty : ${item.qty}\n`;
             report += `   Amount : ₹${amount}\n\n`;
-
             totalItems += item.qty;
             totalSales += amount;
         }
@@ -261,8 +264,8 @@ function renderMenu(){
 
         const card=document.createElement("div");
 
-        card.className=
-        "bg-white rounded-2xl shadow p-5";
+        card.className =
+        "bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-5 text-white hover:scale-105 hover:border-emerald-400 transition duration-300";
 
         card.innerHTML=`
 

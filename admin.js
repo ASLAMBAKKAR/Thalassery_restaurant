@@ -31,18 +31,86 @@ hotelName.value = hotel.name;
 // ---------- Category Dropdown ----------
 function loadCategories() {
 
-    categorySelect.innerHTML = "";
+    const dropdown = document.getElementById("categoryDropdown");
+
+    const selected = document.getElementById("selectedCategory");
+
+    dropdown.innerHTML = "";
 
     categories.forEach(cat => {
 
-        categorySelect.innerHTML += `
-            <option>${cat}</option>
-        `;
+        const item = document.createElement("button");
+
+        item.type = "button";
+
+        item.className = `
+block
+w-full
+px-5
+py-3
+text-left
+text-white
+font-medium
+transition-all
+duration-200
+hover:bg-emerald-400/30
+border-b
+border-white/10
+last:border-b-0`;
+
+        item.textContent = cat;
+
+        item.onclick = () => {
+
+            selected.textContent = cat;
+
+            document.getElementById("itemCategory").value = cat;
+
+            toggleCategoryDropdown();
+
+        };
+
+        dropdown.appendChild(item);
 
     });
 
-}
+    if(categories.length){
 
+        selected.textContent = categories[0];
+
+        document.getElementById("itemCategory").value = categories[0];
+
+    }
+
+}
+function toggleCategoryDropdown(){
+
+    const menu = document.getElementById("categoryDropdown");
+
+    const arrow = document.getElementById("categoryArrow");
+
+    menu.classList.toggle("hidden");
+
+    arrow.classList.toggle("rotate-180");
+
+}
+document.addEventListener("click", function(e){
+
+    const btn = document.getElementById("categoryBtn");
+
+    const menu = document.getElementById("categoryDropdown");
+
+    if(!btn.contains(e.target) && !menu.contains(e.target)){
+
+        menu.classList.add("hidden");
+
+        document
+            .getElementById("categoryArrow")
+            .classList.remove("rotate-180");
+
+    }
+
+});
 // ---------- Render Menu ----------
 function renderMenu() {
 
@@ -52,63 +120,84 @@ function renderMenu() {
 
         menuList.innerHTML += `
 
-<div class="bg-gray-50 border rounded-xl p-5 mb-4">
+<div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-5 mb-4 hover:scale-[1.02] hover:border-emerald-400 transition-all duration-300 text-white">
 
-<div class="flex justify-between items-center">
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5">
 
-<div>
+        <!-- Item Info -->
+        <div class="flex items-center gap-4">
 
-<div class="text-3xl">${item.emoji}</div>
+            <div class="text-5xl">
+                ${item.emoji}
+            </div>
 
-<h2 class="text-xl font-bold mt-2">
+            <div>
 
-${item.name}
+                <h2 class="text-xl font-bold text-white">
+                    ${item.name}
+                </h2>
 
-</h2>
+                <p class="text-lg font-semibold text-emerald-300">
+                    ₹${item.price}
+                </p>
 
-<p class="text-gray-500">
+                <span class="inline-block mt-2 px-4 py-1 text-xs bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 rounded-full backdrop-blur-lg">
+                    ${item.category}
+                </span>
 
-₹${item.price}
+            </div>
 
-</p>
+        </div>
 
-<p class="text-sm text-teal-600">
+        <!-- Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
 
-${item.category}
+            <button
+                onclick="editItem(${item.id})"
+                class="group flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-5 py-3 rounded-xl transition w-full sm:w-auto">
 
-</p>
+                <!-- Pencil Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="2"
+                     stroke="currentColor"
+                     class="w-5 h-5 transition duration-300 group-hover:rotate-12 group-hover:scale-110">
 
-</div>
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897L16.862 4.487z"/>
+                </svg>
 
-<div class="flex items-center gap-2 mt-4">
+                <span>Edit</span>
 
-<button
-    onclick="editItem(${item.id})"
-    class="inline-flex items-center gap-2 bg-neutral-400 hover:bg-neutral-500 text-white px-3 py-2 rounded-lg transition">
+            </button>
 
-    <img
-        src="images/icon_edit.svg"
-        alt="Edit"
-        class="w-5 h-5">
+            <button
+                onclick="deleteItem(${item.id})"
+                class="group flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-3 rounded-xl transition w-full sm:w-auto">
 
-    Edit
+                <!-- Trash Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="2"
+                     stroke="currentColor"
+                     class="w-5 h-5 transition duration-300 group-hover:scale-110">
 
-<button
-    onclick="deleteItem(${item.id})"
-    class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6 7h12M10 11v6m4-6v6M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-8 0h10l-1 12H8L7 7z"/>
 
-    <img
-        src="images/icon_delete.svg"
-        alt="Delete"
-        class="w-5 h-5">
+                </svg>
 
-    <span>Delete</span>
+                <span>Delete</span>
 
-</button>
+            </button>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </div>
 
@@ -117,7 +206,6 @@ ${item.category}
     });
 
 }
-
 // ---------- Save ----------
 function saveMenu() {
 
