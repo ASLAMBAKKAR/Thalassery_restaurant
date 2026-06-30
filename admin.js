@@ -10,10 +10,9 @@ let hotel = JSON.parse(localStorage.getItem("hotel")) || {
 };
 
 let categories = JSON.parse(localStorage.getItem("categories")) || [
-    "Tea",
-    "Meals",
-    "Biryani",
-    "Drinks",
+    "Breakfast",
+    "Lunch",
+    "Dinner",
 ];
 
 let menu = JSON.parse(localStorage.getItem("menu")) || [];
@@ -50,10 +49,12 @@ px-5
 py-3
 text-left
 text-white
-font-medium
+font-semibold
+tracking-wide
 transition-all
 duration-200
-hover:bg-emerald-400/30
+hover:bg-white/15
+hover:text-emerald-300
 border-b
 border-white/10
 last:border-b-0`;
@@ -234,20 +235,9 @@ function editItem(id){
     document.getElementById("editPrice").value = item.price;
     document.getElementById("editEmoji").value = item.emoji;
 
-    const select = document.getElementById("editCategory");
+    loadEditCategories(item.category);
 
-    select.innerHTML = "";
 
-    categories.forEach(cat=>{
-
-        select.innerHTML += `
-            <option
-            ${cat===item.category?"selected":""}>
-            ${cat}
-            </option>
-        `;
-
-    });
 
     document
         .getElementById("editModal")
@@ -259,7 +249,88 @@ function editItem(id){
 
 }
 
+// load edit categories
+
+function loadEditCategories(selectedValue){
+
+    const menu = document.getElementById("editCategoryDropdown");
+
+    menu.innerHTML = "";
+
+    categories.forEach(cat=>{
+
+        const btn = document.createElement("button");
+
+        btn.type="button";
+
+        btn.className=`
+        block
+        w-full
+        px-5
+        py-3
+        text-left
+        text-white
+        hover:bg-white/15
+        hover:backdrop-blur-xl
+        transition
+        border-b
+        border-white/10
+        last:border-0`;
+
+        btn.innerHTML=cat;
+
+        btn.onclick=()=>{
+
+            document.getElementById("editSelectedCategory").innerHTML=cat;
+
+            document.getElementById("editCategory").value=cat;
+
+            toggleEditDropdown();
+
+        };
+
+        menu.appendChild(btn);
+
+    });
+
+    document.getElementById("editSelectedCategory").innerHTML=selectedValue;
+
+    document.getElementById("editCategory").value=selectedValue;
+
+}
+function toggleEditDropdown(){
+
+    document
+        .getElementById("editCategoryDropdown")
+        .classList.toggle("hidden");
+
+    document
+        .getElementById("editArrow")
+        .classList.toggle("rotate-180");
+
+}
+document.addEventListener("click",(e)=>{
+
+    const btn=document.getElementById("editCategoryBtn");
+
+    const menu=document.getElementById("editCategoryDropdown");
+
+    if(!btn.contains(e.target) && !menu.contains(e.target)){
+
+        menu.classList.add("hidden");
+
+        document
+            .getElementById("editArrow")
+            .classList.remove("rotate-180");
+
+    }
+
+});
+
 function updateItem(){
+
+    item.category =
+document.getElementById("editCategory").value;
 
     const item = menu.find(i=>i.id===editingId);
 
