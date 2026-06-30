@@ -5,10 +5,10 @@ const hotel = JSON.parse(localStorage.getItem("hotel")) || {
 
 // Default Categories
 const categories = JSON.parse(localStorage.getItem("categories")) || [
-    "Tea",
-    "Meals",
-    "Biryani",
-    "Drinks",
+    "Breads",
+    "Rice",
+    "Currys",
+    "Meals"
 ];
 
 // Default Menu

@@ -10,9 +10,10 @@ let hotel = JSON.parse(localStorage.getItem("hotel")) || {
 };
 
 let categories = JSON.parse(localStorage.getItem("categories")) || [
-    "Breakfast",
-    "Lunch",
-    "Dinner",
+     "Breads",
+    "Rice",
+    "Currys",
+    "Meals"
 ];
 
 let menu = JSON.parse(localStorage.getItem("menu")) || [];
@@ -327,24 +328,19 @@ document.addEventListener("click",(e)=>{
 
 });
 
-function updateItem(){
+function updateItem() {
 
-    item.category =
-document.getElementById("editCategory").value;
+    const item = menu.find(i => i.id === editingId);
 
-    const item = menu.find(i=>i.id===editingId);
+    if (!item) return;
 
-    item.name =
-        document.getElementById("editName").value;
+    item.name = document.getElementById("editName").value;
 
-    item.price =
-        Number(document.getElementById("editPrice").value);
+    item.price = Number(document.getElementById("editPrice").value);
 
-    item.category =
-        document.getElementById("editCategory").value;
+    item.category = document.getElementById("editCategory").value;
 
-    item.emoji =
-        document.getElementById("editEmoji").value;
+    item.emoji = document.getElementById("editEmoji").value;
 
     saveMenu();
 
