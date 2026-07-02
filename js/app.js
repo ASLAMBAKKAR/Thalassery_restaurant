@@ -3,7 +3,6 @@ const hotel = JSON.parse(localStorage.getItem("hotel")) || {
     name: "THALASSERY HOTEL"
 };
 
-// Default Categories
 const categories = JSON.parse(localStorage.getItem("categories")) || [
     "Breads",
     "Rice",
@@ -11,7 +10,6 @@ const categories = JSON.parse(localStorage.getItem("categories")) || [
     "Meals"
 ];
 
-// Default Menu
 let menu = JSON.parse(localStorage.getItem("menu")) || [
     {id:1,name:"Tea",price:10,category:"Tea",qty:0,emoji:"☕"},
     {id:2,name:"Coffee",price:15,category:"Tea",qty:0,emoji:"☕"},
@@ -25,7 +23,6 @@ let currentCategory = categories[0];
 const categoryDiv = document.getElementById("categories");
 const menuGrid = document.getElementById("menuGrid");
 
-// Date
 document.getElementById("todayDate").innerText =
 new Date().toLocaleDateString("en-IN",{
     weekday:"short",
@@ -34,16 +31,13 @@ new Date().toLocaleDateString("en-IN",{
     year:"numeric"
 });
 
-// Hotel Name
 document.querySelector("h1").innerText =
 hotel.name;
 
-// Save
 function saveMenu(){
     localStorage.setItem("menu",JSON.stringify(menu));
 }
 
-// Categories
 function renderCategories(){
 
     categoryDiv.innerHTML="";
@@ -92,43 +86,65 @@ function renderCategories(){
 
 }
 
-// saveday
 function saveDay() {
 
     const today = new Date().toLocaleDateString("en-IN");
 
-    const totalAmount = menu.reduce(
+    const soldItems = menu.filter(item => item.qty > 0);
+
+    const totalAmount = soldItems.reduce(
         (sum, item) => sum + (item.price * item.qty),
         0
     );
 
-    const totalItems = menu.reduce(
+    const totalItems = soldItems.reduce(
         (sum, item) => sum + item.qty,
         0
     );
 
     const report = {
+
+        id: Date.now(),
+
         date: today,
-        menu: menu,
-        totalAmount,
+
+        time: new Date().toLocaleTimeString("en-IN"),
+
+        items: soldItems,
+
         totalItems,
-        cash: cash.value,
-        upi: upi.value
+
+        totalAmount,
+
+        cash: Number(cash.value) || 0,
+
+        upi: Number(upi.value) || 0,
+
+        collection:
+            (Number(cash.value) || 0) +
+            (Number(upi.value) || 0),
+
+        difference:
+            totalAmount -
+            ((Number(cash.value) || 0) +
+            (Number(upi.value) || 0))
+
     };
 
     let reports = JSON.parse(localStorage.getItem("reports")) || [];
 
     reports.push(report);
+    console.log(report);
 
     localStorage.setItem(
         "reports",
         JSON.stringify(reports)
     );
+    console.log(localStorage.getItem("reports"));
 
-    alert("✅ Day Saved");
+    alert("✅ Day Saved Successfully");
+
 }
-
-// share report
 
 function shareReport() {
 
@@ -195,7 +211,6 @@ function shareReport() {
     }
 
 }
-// reset sales
 
 function resetSales(){
 
@@ -219,7 +234,6 @@ function resetSales(){
     renderMenu();
 
 }
-//admin button
 document.getElementById("adminBtn").addEventListener("click", openLogin);
 
 
@@ -253,7 +267,6 @@ function loginAdmin() {
     }
 }
 
-// Menu
 function renderMenu(){
 
     menuGrid.innerHTML="";
@@ -321,7 +334,6 @@ function renderMenu(){
 
 }
 
-// Increase
 function increase(id){
 
     const item=menu.find(i=>i.id===id);
@@ -334,7 +346,6 @@ function increase(id){
 
 }
 
-// Decrease
 function decrease(id){
 
     const item=menu.find(i=>i.id===id);
@@ -351,7 +362,6 @@ function decrease(id){
 
 }
 
-// login modal
 
 function openLogin(){
 
@@ -410,7 +420,6 @@ function loginAdmin(){
     }
 
 }
-// Tap quantity to edit
 function editQty(id){
 
     const item=menu.find(i=>i.id===id);
@@ -430,7 +439,6 @@ function editQty(id){
 
 }
 
-// Totals
 function calculate(){
 
     let items=0;
@@ -452,7 +460,6 @@ function calculate(){
 
 }
 
-// Cash & UPI
 const cash=document.getElementById("cash");
 const upi=document.getElementById("upi");
 
@@ -488,6 +495,5 @@ document.addEventListener("keydown", function(e){
 
 });
 
-// Start
 renderCategories();
 renderMenu();

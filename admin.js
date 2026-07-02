@@ -1,10 +1,8 @@
 
-//  Login Check 
 if (sessionStorage.getItem("adminLogged") !== "true") {
     window.location.href = "index.html";
 }
 
-// Load Data 
 let hotel = JSON.parse(localStorage.getItem("hotel")) || {
     name: "THALASSERY HOTEL"
 };
@@ -18,17 +16,14 @@ let categories = JSON.parse(localStorage.getItem("categories")) || [
 
 let menu = JSON.parse(localStorage.getItem("menu")) || [];
 
-// ---------- Elements ----------
 const menuList = document.getElementById("menuList");
 
 const categorySelect = document.getElementById("itemCategory");
 
 const hotelName = document.getElementById("hotelName");
 
-// ---------- Load Settings ----------
 hotelName.value = hotel.name;
 
-// ---------- Category Dropdown ----------
 function loadCategories() {
 
     const dropdown = document.getElementById("categoryDropdown");
@@ -113,7 +108,6 @@ document.addEventListener("click", function(e){
     }
 
 });
-// ---------- Render Menu ----------
 function renderMenu() {
 
     menuList.innerHTML = "";
@@ -208,7 +202,6 @@ function renderMenu() {
     });
 
 }
-// ---------- Save ----------
 function saveMenu() {
 
     localStorage.setItem(
@@ -218,7 +211,6 @@ function saveMenu() {
 
 }
 
-// ---------- Start ----------
 loadCategories();
 
 renderMenu();
@@ -250,7 +242,6 @@ function editItem(id){
 
 }
 
-// load edit categories
 
 function loadEditCategories(selectedValue){
 
@@ -480,14 +471,12 @@ function saveSettings(){
         JSON.stringify(hotel)
     );
 
-    // Username
 
     localStorage.setItem(
         "adminUser",
         document.getElementById("adminUser").value
     );
 
-    // Password
 
     const current =
         document.getElementById("currentPassword").value;
@@ -541,8 +530,6 @@ function saveSettings(){
     document.getElementById("confirmPassword").value="";
 
 }
-
-// logout
 
 function logout(){
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="images/thalassery_logo.png">
+
+<title>Thalassey</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-teal-900 to-cyan-900 text-white">
+
+<div class="max-w-7xl mx-auto p-6">
+
+    <!-- Header -->
+    <div class="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-6 shadow-2xl flex justify-between items-center">
+
+        <div>
+            <h1 class="text-4xl font-bold">
+                📊 Saved Reports
+            </h1>
+
+            <p class="text-gray-300">
+                Thalassery Hotel POS
+            </p>
+        </div>
+
+        <div class="flex gap-4">
+
+            <button
+                onclick="downloadPDF()"
+                class="px-6 py-3 rounded-2xl
+                bg-gradient-to-r
+                from-red-500
+                to-rose-600
+                text-white
+                font-bold
+                shadow-xl
+                hover:scale-105
+                transition">
+
+                📄 Download PDF
+
+            </button>
+
+            <button
+                onclick="location.href='index.html'"
+                class="px-6 py-3 rounded-2xl
+                bg-white/10
+                backdrop-blur-xl
+                border border-white/20
+                hover:bg-white/20
+                transition">
+
+                ← Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        id="reportList"
+        class="space-y-6 mt-8">
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="reports.js"></script>
+
+</body>
+</html>

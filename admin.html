@@ -17,7 +17,6 @@
 
 <div class="max-w-7xl mx-auto p-6">
 
-    <!-- Header -->
 
     <div class="bg-white/10 backdrop-blur-2xl border border-white/20 text-white rounded-3xl p-6 shadow-2xl">
 
@@ -45,11 +44,9 @@
 
     </div>
 
-    <!-- Dashboard -->
 
     <div class="grid lg:grid-cols-3 gap-6 mt-6">
 
-        <!-- LEFT -->
 
         <div class="lg:col-span-2">
 
@@ -67,11 +64,9 @@
 
         </div>
 
-        <!-- RIGHT -->
 
         <div>
 
-            <!-- Add Item -->
 
             <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-6 mb-6 text-white">
 
@@ -94,10 +89,8 @@
 
                 <div class="relative w-full mb-3">
 
-    <!-- Selected -->
    <div class="relative w-full mb-3 z-[999]">
 
-    <!-- Button -->
     <button
         id="categoryBtn"
         type="button"
@@ -136,7 +129,6 @@
 
     </button>
 
-    <!-- Dropdown -->
     <div
         id="categoryDropdown"
         class="hidden absolute left-0 top-full mt-2 w-full z-[9999]
@@ -150,7 +142,6 @@
     </div>
 
 </div>
-<!-- Hidden input -->
 <input type="hidden" id="itemCategory">
 
                 <input
@@ -239,14 +230,25 @@
                 class="w-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-3 text-white placeholder-gray-300 focus:border-emerald-400 outline-none">
         </div>
 
-        <button
-            onclick="saveSettings()"
-            class="w-full bg-gradient-to-r from-emerald-500 to-cyan-600 hover:scale-105 transition duration-300 text-white py-3 rounded-2xl shadow-xl font-bold">
+      <div class="w-full space-y-4 mt-6">
 
-            💾 Save Settings
+    <button
+        onclick="saveSettings()"
+        class="w-full bg-gradient-to-r from-emerald-500 to-cyan-600 hover:scale-105 transition duration-300 text-white py-3 rounded-2xl shadow-xl font-bold">
 
-        </button>
+        💾 Save Settings
 
+    </button>
+
+    <button
+        onclick="location.href='reports.html'"
+        class="w-full bg-gradient-to-r from-indigo-500 to-cyan-500 hover:scale-105 transition duration-300 text-white py-3 rounded-2xl shadow-xl font-bold">
+
+        📊 View Reports
+
+    </button>
+
+</div>
     </div>
 
 </div>
@@ -255,7 +257,6 @@
     </div>
 
 </div>
-<!-- Edit Item Modal -->
 <div id="editModal" class="fixed inset-0 bg-black/40 backdrop-blur-md hidden items-center justify-center z-50">
 
     <div class="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-6 w-full max-w-md text-white shadow-2xl">
@@ -362,6 +363,7 @@
 </div>
 
 <script src="admin.js"></script>
+<script src="reports.js"></script>
 
 </body>
 </html>
